@@ -318,14 +318,13 @@
           </p>
           <form @submit.prevent="submitReserve">
             <label class="form-label" for="guest-name"
-              >Tu nombre <span>*</span></label
+              >Tu nombre <span class="optional">(opcional)</span></label
             ><input
               class="form-field"
               id="guest-name"
               x-model.trim="reservation.name"
               placeholder="Ej. María González"
               maxlength="100"
-              required
               autocomplete="name"
             /><template x-if="selectedGift.quantity > 1">
               <div>

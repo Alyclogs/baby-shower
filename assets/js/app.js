@@ -60,9 +60,9 @@ document.addEventListener('alpine:init', () => {
         const guest = await babyFirebase.ensureGuest();
         const giftId = this.selectedGift.id;
         const giftName = this.selectedGift.name;
-        const name = this.reservation.name.trim(), message = this.reservation.message.trim();
+        const name = this.reservation.name.trim() || 'Anónimo', message = this.reservation.message.trim();
         const quantity = Number(this.reservation.quantity);
-        if (name.length < 2 || name.length > 100 || message.length > 400) throw new Error('Revisa tu nombre o mensaje.');
+        if (name.length > 100 || message.length > 400) throw new Error('Revisa tu nombre o mensaje.');
         if (!Number.isInteger(quantity) || quantity < 1 || quantity > 100) throw new Error('Cantidad inválida.');
         const giftRef = db.collection('gifts').doc(giftId);
         const resRef = db.collection('reservations').doc(`${giftId}_${guest.uid}`);
