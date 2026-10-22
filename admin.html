@@ -154,9 +154,19 @@
       <section x-show="tab==='regalos'" class="admin-pane">
         <div class="admin-pane-heading">
           <h2>Lista de regalitos</h2>
-          <button type="button" class="button button-primary" @click="newGift">
-            + Agregar regalo
-          </button>
+          <div class="admin-pane-actions">
+            <button
+              type="button"
+              class="button button-outline"
+              @click="importSuggested"
+              :disabled="busy"
+            >
+              🎀 Importar regalos sugeridos
+            </button>
+            <button type="button" class="button button-primary" @click="newGift">
+              + Agregar regalo
+            </button>
+          </div>
         </div>
         <div class="admin-table-wrap">
           <table class="admin-table">

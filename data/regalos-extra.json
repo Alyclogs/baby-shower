@@ -1,0 +1,474 @@
+{
+  "gifts": [
+    {
+      "id": "extra-01",
+      "name": "Cuna o moisés",
+      "description": "Un lugar seguro y cómodo para sus primeros meses de sueño.",
+      "category": "Dormitorio",
+      "emoji": "🛏️",
+      "quantity": 1,
+      "link": "",
+      "featured": true
+    },
+    {
+      "id": "extra-02",
+      "name": "Colchón para cuna",
+      "description": "Firme y transpirable, a la medida de su cuna.",
+      "category": "Dormitorio",
+      "emoji": "🛌",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-03",
+      "name": "Protector de colchón impermeable",
+      "description": "Cuida el colchón de pérdidas y se lava fácil.",
+      "category": "Dormitorio",
+      "emoji": "💧",
+      "quantity": 2,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-04",
+      "name": "Saco de dormir",
+      "description": "Abriga sin mantas sueltas, ideal para dormir tranquila.",
+      "category": "Dormitorio",
+      "emoji": "😴",
+      "quantity": 2,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-05",
+      "name": "Monitor para bebé",
+      "description": "Para vigilar su sueño desde cualquier parte de la casa.",
+      "category": "Dormitorio",
+      "emoji": "📹",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-06",
+      "name": "Lámpara de noche suave",
+      "description": "Una lucecita cálida para las tomas de madrugada.",
+      "category": "Dormitorio",
+      "emoji": "🌙",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-07",
+      "name": "Nido o reductor de cama",
+      "description": "Para que se sienta abrazadita al dormir.",
+      "category": "Dormitorio",
+      "emoji": "🪺",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-08",
+      "name": "Cobija polar o manta térmica",
+      "description": "Calentita para los días fríos.",
+      "category": "Dormitorio",
+      "emoji": "🧸",
+      "quantity": 2,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-09",
+      "name": "Móvil musical para cuna",
+      "description": "Melodías suaves y figuras para mirar antes de dormir.",
+      "category": "Dormitorio",
+      "emoji": "🎠",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-10",
+      "name": "Mecedora o hamaca para bebé",
+      "description": "Para relajarla y mecerla durante el día.",
+      "category": "Dormitorio",
+      "emoji": "🪑",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-11",
+      "name": "Coche de paseo (cochecito)",
+      "description": "Cómodo y plegable para salir a pasear.",
+      "category": "Paseo",
+      "emoji": "🛒",
+      "quantity": 1,
+      "link": "",
+      "featured": true
+    },
+    {
+      "id": "extra-12",
+      "name": "Portabebé ergonómico",
+      "description": "Para llevarla pegadita a ti con las manos libres.",
+      "category": "Paseo",
+      "emoji": "🤱",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-13",
+      "name": "Silla de auto (autoasiento)",
+      "description": "Seguridad imprescindible en cada viaje.",
+      "category": "Paseo",
+      "emoji": "🚗",
+      "quantity": 1,
+      "link": "",
+      "featured": true
+    },
+    {
+      "id": "extra-14",
+      "name": "Pañalera o bolso de maternidad",
+      "description": "Con espacio para todo lo que necesite fuera de casa.",
+      "category": "Paseo",
+      "emoji": "👜",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-15",
+      "name": "Cubre cochecito o mosquitero",
+      "description": "Protección contra insectos y sol.",
+      "category": "Paseo",
+      "emoji": "🌤️",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-16",
+      "name": "Sombrilla o parasol para coche",
+      "description": "Sombra para sus paseos de día.",
+      "category": "Paseo",
+      "emoji": "☂️",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-17",
+      "name": "Espejo retrovisor para auto",
+      "description": "Para verla desde el asiento delantero mientras manejas.",
+      "category": "Paseo",
+      "emoji": "🪞",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-18",
+      "name": "Esterilizador de biberones",
+      "description": "Mantiene todo limpio de forma rápida y segura.",
+      "category": "Alimentación",
+      "emoji": "♨️",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-19",
+      "name": "Set de biberones",
+      "description": "Varios tamaños para sus primeras tomas.",
+      "category": "Alimentación",
+      "emoji": "🍼",
+      "quantity": 3,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-20",
+      "name": "Extractor de leche",
+      "description": "Practicidad para mamá durante la lactancia.",
+      "category": "Alimentación",
+      "emoji": "🤱",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-21",
+      "name": "Almohada de lactancia",
+      "description": "Comodidad para mamá y bebé en cada toma.",
+      "category": "Alimentación",
+      "emoji": "💗",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-22",
+      "name": "Cubre pecho y discos de lactancia",
+      "description": "Cómodos y discretos para salir con tranquilidad.",
+      "category": "Alimentación",
+      "emoji": "🌸",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-23",
+      "name": "Silla de comer (periquera)",
+      "description": "Para cuando empiece a comer sólidos.",
+      "category": "Alimentación",
+      "emoji": "🪑",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-24",
+      "name": "Set de platos y cubiertos de silicona",
+      "description": "Suaves y seguros para sus primeras papillas.",
+      "category": "Alimentación",
+      "emoji": "🥄",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-25",
+      "name": "Vasos de aprendizaje",
+      "description": "Para pasar del biberón al vaso poco a poco.",
+      "category": "Alimentación",
+      "emoji": "🥤",
+      "quantity": 2,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-26",
+      "name": "Procesador de alimentos",
+      "description": "Para preparar papillas y purés caseros.",
+      "category": "Alimentación",
+      "emoji": "🥕",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-27",
+      "name": "Bañera para bebé",
+      "description": "Segura y con soporte para el baño diario.",
+      "category": "Baño",
+      "emoji": "🛁",
+      "quantity": 1,
+      "link": "",
+      "featured": true
+    },
+    {
+      "id": "extra-28",
+      "name": "Termómetro de baño y habitación",
+      "description": "Para saber que el agua y el ambiente están a la temperatura ideal.",
+      "category": "Baño",
+      "emoji": "🌡️",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-29",
+      "name": "Kit de cuidado del bebé",
+      "description": "Cortaúñas, cepillo, peine, aspirador nasal y termómetro.",
+      "category": "Baño",
+      "emoji": "🧴",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-30",
+      "name": "Jabón y shampoo para bebé",
+      "description": "Suaves, sin lágrimas y para piel sensible.",
+      "category": "Baño",
+      "emoji": "🧼",
+      "quantity": 3,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-31",
+      "name": "Crema para rozaduras",
+      "description": "Protege su piel de la zona del pañal.",
+      "category": "Baño",
+      "emoji": "🧴",
+      "quantity": 3,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-32",
+      "name": "Cambiador portátil",
+      "description": "Un lugar limpio para cambiarla en cualquier sitio.",
+      "category": "Baño",
+      "emoji": "🧷",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-33",
+      "name": "Cómoda con cambiador",
+      "description": "Mueble con espacio para guardar sus cosas de aseo.",
+      "category": "Baño",
+      "emoji": "🗄️",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-34",
+      "name": "Pañales talla P y M",
+      "description": "Para cuando crezca y pase de la talla recién nacida.",
+      "category": "Baño",
+      "emoji": "👶",
+      "quantity": 6,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-35",
+      "name": "Bacinica o adaptador de inodoro",
+      "description": "Para cuando comience el control de esfínteres.",
+      "category": "Baño",
+      "emoji": "🚽",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-36",
+      "name": "Pijamas enterizas",
+      "description": "Cómodas y abrigadoras para dormir.",
+      "category": "Ropita",
+      "emoji": "👗",
+      "quantity": 4,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-37",
+      "name": "Gorritos y guantes de algodón",
+      "description": "Cuidan su cabecita y evitan los rasguños.",
+      "category": "Ropita",
+      "emoji": "🧢",
+      "quantity": 3,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-38",
+      "name": "Medias y botitas",
+      "description": "Pies calentitos desde el primer día.",
+      "category": "Ropita",
+      "emoji": "🧦",
+      "quantity": 5,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-39",
+      "name": "Abrigo o chaqueta tejida",
+      "description": "Para los días frescos y las salidas.",
+      "category": "Ropita",
+      "emoji": "🧥",
+      "quantity": 2,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-40",
+      "name": "Ropa talla 3 a 6 meses",
+      "description": "Para cuando crezca rapidito.",
+      "category": "Ropita",
+      "emoji": "👚",
+      "quantity": 3,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-41",
+      "name": "Vestidito de fiesta",
+      "description": "Para sus primeras ocasiones especiales.",
+      "category": "Ropita",
+      "emoji": "🎀",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-42",
+      "name": "Gimnasio de actividades",
+      "description": "Estimula sus sentidos y movimientos boca abajo.",
+      "category": "Juguetes",
+      "emoji": "🤸",
+      "quantity": 1,
+      "link": "",
+      "featured": true
+    },
+    {
+      "id": "extra-43",
+      "name": "Libros de tela y cartón",
+      "description": "Colores y texturas para sus primeras lecturas.",
+      "category": "Juguetes",
+      "emoji": "📖",
+      "quantity": 3,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-44",
+      "name": "Peluche suave",
+      "description": "Un compañero para sus siestas.",
+      "category": "Juguetes",
+      "emoji": "🧸",
+      "quantity": 2,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-45",
+      "name": "Alfombra de juego acolchada",
+      "description": "Un espacio cómodo y seguro para gatear y jugar.",
+      "category": "Juguetes",
+      "emoji": "🧩",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-46",
+      "name": "Bloques y juguetes apilables",
+      "description": "Para desarrollar su coordinación.",
+      "category": "Juguetes",
+      "emoji": "🧱",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "extra-47",
+      "name": "Caminador o andador de apoyo",
+      "description": "Para sus primeros pasitos.",
+      "category": "Juguetes",
+      "emoji": "🚶",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    }
+  ]
+}

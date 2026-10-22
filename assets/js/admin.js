@@ -184,6 +184,21 @@ document.addEventListener('alpine:init', () => {
       } catch (e) { this.error = babyFirebase.readableError(e); }
       finally { this.busy = false; }
     },
+    // Agrega los regalos sugeridos que aún no existan (por id), sin tocar los demás.
+    async importSuggested() {
+      const { db } = babyFirebase.init();
+      await this.submit(async () => {
+        const response = await fetch('data/regalos-extra.json', {cache:'no-store'});
+        if (!response.ok) throw new Error('No se encontró el archivo de regalos sugeridos.');
+        const { gifts } = await response.json();
+        const existing = new Set(this.gifts.map(g => g.id));
+        const missing = gifts.filter(g => !existing.has(g.id));
+        if (!missing.length) throw new Error('Los regalos sugeridos ya están importados.');
+        const batch = db.batch();
+        missing.forEach(({id, ...gift}) => batch.set(db.collection('gifts').doc(id), {...gift, reserved:0}));
+        await batch.commit();
+      }, '¡Regalos sugeridos importados! Edita cada uno para añadir su enlace e imagen.');
+    },
     async importExamples() {
       if (this.gifts.length > 0) { this.error = 'La importación solo está disponible si no tienes regalos.'; return; }
       const { db } = babyFirebase.init();
