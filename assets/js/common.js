@@ -1,5 +1,5 @@
 const defaultSite = {
-  baby_name: 'Nuestra bebita',
+  baby_name: 'Halley',
   headline: 'Una dulce espera, un amor infinito',
   parents: 'Hecho con amor para Halley y su familia',
   welcome: 'Nuestra pequeña está en camino y cada detalle elegido con cariño será parte de su historia. ♡',
