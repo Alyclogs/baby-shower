@@ -653,7 +653,7 @@ button:disabled {
   background: #fcefec;
 }
 .catalog-section {
-  padding: 32px 0 20px;
+  padding: 32px 0 122px;
 }
 .section-head {
   display: flex;
@@ -679,52 +679,6 @@ button:disabled {
   font-size: 16px;
   line-height: 1.8;
   color: #8c8086;
-}
-.progress-card {
-  background: #fff;
-  border: 1px solid #f0e9e7;
-  padding: 24px 26px 20px;
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-  width: 290px;
-  margin-bottom: 6px;
-  flex-shrink: 0;
-}
-.progress-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  align-items: center;
-}
-.progress-top span {
-  font-size: 14px;
-  font-weight: 700;
-  color: #806f79;
-}
-.progress-top strong {
-  font-size: 16px;
-  color: #b87986;
-}
-.progress-track {
-  height: 7px;
-  border-radius: 8px;
-  background: #f5e9e9;
-  margin: 16px 0 12px;
-  overflow: hidden;
-}
-.progress-bar {
-  height: 100%;
-  border-radius: 8px;
-  background: linear-gradient(90deg, #e8c0bb, #b77989);
-  transition: width 0.35s;
-}
-.progress-foot {
-  font-size: 12px;
-  color: #9f9196;
-}
-.progress-foot span {
-  color: #c38b96;
-  margin-right: 4px;
 }
 .toolbar {
   display: flex;
@@ -862,7 +816,7 @@ button:disabled {
   box-shadow: 0 18px 35px #84667a15;
 }
 .gift-art {
-  height: 207px;
+  aspect-ratio: 1 / 1;
   position: relative;
   display: flex;
   justify-content: center;
@@ -1015,33 +969,44 @@ button:disabled {
   flex-wrap: wrap;
 }
 .gift-button {
-  border: 1px solid #e8c8cd;
+  border: 0;
   border-radius: 40px;
-  background: transparent;
+  background: linear-gradient(135deg, #d0909b, #b7727f);
+  box-shadow: 0 8px 18px #b7727f40;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 13px;
-  color: #af7885;
-  padding: 12px 15px;
+  justify-content: center;
+  gap: 10px;
+  color: #fff;
+  padding: 15px 18px;
   font-weight: 800;
-  font-size: 14px;
-  flex: 1;
+  font-size: 15px;
+  flex: 1 1 100%;
+  cursor: pointer;
   white-space: nowrap;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    filter 0.2s;
 }
 .gift-button:hover:not(:disabled) {
-  background: #f9eded;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px #b7727f55;
+  filter: brightness(1.05);
 }
 .gift-button:disabled {
-  border-color: #e9e6e4;
-  background: #f7f6f4;
+  background: #f1eeec;
+  box-shadow: none;
   color: #b5aeb0;
+  cursor: not-allowed;
 }
 .gift-button span:last-child {
   font-size: 17px;
   line-height: 0.7;
 }
 .gift-link {
+  flex: 1 1 100%;
+  text-align: center;
   font-size: 14px;
   color: #9c8990;
   text-decoration: underline;
@@ -1841,10 +1806,6 @@ button:disabled {
   .categories-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-  .progress-card {
-    width: 242px;
-    padding: 19px;
-  }
   .toolbar {
     flex-direction: column;
     align-items: stretch;
@@ -1950,7 +1911,7 @@ button:disabled {
     padding: 8px 0 22px;
   }
   .catalog-section {
-    padding: 32px 0 28px;
+    padding: 32px 0 92px;
   }
   .section-head {
     display: block;
@@ -1967,11 +1928,6 @@ button:disabled {
   .section-head p {
     font-size: 12px;
   }
-  .progress-card {
-    width: min(100%, 330px);
-    margin: 24px auto 0;
-    text-align: left;
-  }
   .toolbar {
     margin-top: 32px;
   }
@@ -1987,9 +1943,6 @@ button:disabled {
     gap: 16px;
     max-width: 430px;
     margin: auto;
-  }
-  .gift-art {
-    height: 210px;
   }
   .gift-content {
     padding: 21px;
