@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f5f2" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/12.19.0/firebase-auth-compat.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore-compat.js"
+    ></script>
+    <script defer src="assets/js/firebase-config.js"></script>
+    <script defer src="assets/js/firebase-api.js"></script>
+    <script defer src="assets/js/common.js"></script>
+    <script defer src="assets/js/admin.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"
+    ></script>
+    <title>Panel administrador · Baby Shower</title>
+  </head>
+  <body class="admin-body" x-data="adminApp" x-cloak>
+    <header class="admin-bar">
+      <div class="wrap admin-bar-inner">
+        <a href="index.html" class="admin-brand"
+          ><span>♡</span> dulce espera
+          <small
+            style="
+              font:
+                10px &quot;DM Sans&quot;,
+                Arial,
+                sans-serif;
+              color: #bca6ae;
+              letter-spacing: 1px;
+            "
+          >
+            / ADMIN</small
+          ></a
+        >
+        <div class="admin-header-actions">
+          <a href="index.html" target="_blank" rel="noopener">Ver página ↗</a
+          ><button x-show="authenticated" type="button" @click="logout">
+            Cerrar sesión
+          </button>
+        </div>
+      </div>
+    </header>
+    <div
+      class="wrap"
+      x-show="loading"
+      style="padding: 60px; text-align: center; color: #a58189"
+    >
+      Cargando el panel...
+    </div>
+    <div class="admin-login" x-show="!loading && !authenticated">
+      <div class="admin-login-icon">♡</div>
+      <h1>¡Hola de nuevo!</h1>
+      <p>
+        Entra con el correo y la contraseña de la cuenta administradora creada
+        en Firebase Authentication.
+      </p>
+      <div x-show="error" class="admin-error" x-text="error"></div>
+      <form @submit.prevent="login">
+        <label class="form-label" for="login-email"
+          >Correo del administrador</label
+        ><input
+          class="form-field"
+          id="login-email"
+          type="email"
+          x-model.trim="email"
+          placeholder="correo@ejemplo.com"
+          required
+          autocomplete="username"
+        /><label class="form-label" for="login-pass"
+          >Contraseña de administrador</label
+        ><input
+          class="form-field"
+          id="login-pass"
+          type="password"
+          x-model="password"
+          placeholder="Tu contraseña"
+          required
+          autocomplete="current-password"
+        /><button
+          class="button button-primary full-width"
+          type="submit"
+          :disabled="busy"
+          x-text="busy?'Ingresando...':'Ingresar al panel ↗'"
+        ></button>
+      </form>
+      <p class="admin-muted">
+        La cuenta se crea en Firebase Console → Authentication → Users.
+        <button
+          type="button"
+          class="admin-action"
+          @click="resetPassword"
+          :disabled="busy"
+        >
+          Olvidé mi contraseña
+        </button>
+      </p>
+      <div x-show="notice" class="admin-success" x-text="notice"></div>
+    </div>
+    <main class="wrap admin-page" x-show="!loading && authenticated">
+      <h1>Tu pequeño panel ♡</h1>
+      <p class="admin-subtitle">
+        Aquí puedes editar los regalos, revisar las reservas y personalizar la
+        página.
+      </p>
+      <div class="admin-tabs" role="tablist">
+        <button
+          class="admin-tab"
+          :class="{active:tab==='regalos'}"
+          @click="tab='regalos'"
+        >
+          🎁 Regalos <span x-text="gifts.length"></span></button
+        ><button
+          class="admin-tab"
+          :class="{active:tab==='reservas'}"
+          @click="tab='reservas'"
+        >
+          💌 Reservas <span x-text="reservations.length"></span></button
+        ><button
+          class="admin-tab"
+          :class="{active:tab==='evento'}"
+          @click="tab='evento'"
+        >
+          🌸 Mi evento</button
+        ><button
+          class="admin-tab"
+          :class="{active:tab==='seguridad'}"
+          @click="tab='seguridad'"
+        >
+          🔐 Seguridad
+        </button>
+      </div>
+      <div x-show="error" class="admin-error" x-text="error" role="alert"></div>
+      <div
+        x-show="notice"
+        class="admin-success"
+        x-text="notice"
+        role="status"
+      ></div>
+      <section x-show="tab==='regalos'" class="admin-pane">
+        <div class="admin-pane-heading">
+          <h2>Lista de regalitos</h2>
+          <button type="button" class="button button-primary" @click="newGift">
+            + Agregar regalo
+          </button>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Regalo</th>
+                <th>Categoría</th>
+                <th>Reservados</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template x-for="gift in gifts" :key="gift.id"
+                ><tr>
+                  <td>
+                    <strong
+                      ><img
+                        class="table-thumb"
+                        x-show="gift.image"
+                        :src="gift.image"
+                        alt=""
+                      /><span x-show="!gift.image" x-text="gift.emoji"></span>
+                      <span x-text="gift.name"></span
+                    ></strong>
+                    <div class="table-sub" x-text="gift.description"></div>
+                  </td>
+                  <td x-text="gift.category"></td>
+                  <td>
+                    <span
+                      class="status-pill"
+                      :class="{'is-full':!gift.available}"
+                      x-text="`${gift.reserved} / ${gift.quantity}`"
+                    ></span>
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      class="admin-action"
+                      @click="editGift(gift)"
+                    >
+                      Editar</button
+                    ><button
+                      type="button"
+                      class="admin-action danger"
+                      @click="deleteGift(gift)"
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr></template
+              >
+            </tbody>
+          </table>
+        </div>
+        <div class="empty-admin" x-show="!gifts.length">
+          Aún no hay regalos. Puedes crearlos uno por uno o cargar una lista de
+          ejemplo.
+          <button
+            type="button"
+            class="admin-action"
+            @click="importExamples"
+            :disabled="busy"
+          >
+            🎀 Importar 12 regalos de ejemplo
+          </button>
+        </div>
+      </section>
+      <section x-show="tab==='reservas'" class="admin-pane">
+        <div class="admin-pane-heading">
+          <h2>Reservas recibidas</h2>
+          <button type="button" class="admin-action" @click="refresh">
+            Actualizar ↻
+          </button>
+        </div>
+        <div class="admin-card-mini">
+          Las personas invitadas no pueden ver los nombres de quienes
+          reservaron. Solo aparecen aquí, en tu panel privado. Si alguien cambia
+          de opinión, puedes liberar su reserva.
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Invitado/a</th>
+                <th>Regalo</th>
+                <th>Cantidad</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template x-for="r in sortedReservations" :key="r.id"
+                ><tr>
+                  <td>
+                    <strong x-text="r.name"></strong>
+                    <div
+                      class="table-sub"
+                      x-show="r.message"
+                      x-text="r.message"
+                    ></div>
+                  </td>
+                  <td x-text="giftName(r.gift_id)"></td>
+                  <td x-text="r.quantity"></td>
+                  <td x-text="formatDate(r.created_at)"></td>
+                  <td>
+                    <button
+                      class="admin-action danger"
+                      @click="cancelReservation(r)"
+                    >
+                      Liberar
+                    </button>
+                  </td>
+                </tr></template
+              >
+            </tbody>
+          </table>
+        </div>
+        <div x-show="!reservations.length" class="empty-admin">
+          Aún no hay reservas. ¡Pronto llegarán! 💌
+        </div>
+      </section>
+      <section x-show="tab==='evento'" class="admin-pane">
+        <div class="admin-pane-heading"><h2>Datos de tu baby shower</h2></div>
+        <div class="admin-card-mini">
+          Personaliza los textos que verán tus invitados. La fecha, el lugar y
+          el WhatsApp son opcionales; puedes dejarlos vacíos.
+        </div>
+        <form class="admin-form" @submit.prevent="saveSite">
+          <div>
+            <label class="form-label" for="baby"
+              >Cómo llamaremos a la bebé</label
+            ><input
+              id="baby"
+              class="form-field"
+              x-model="site.baby_name"
+              maxlength="90"
+              required
+            />
+          </div>
+          <div>
+            <label class="form-label" for="parents">Firma / familia</label
+            ><input
+              id="parents"
+              class="form-field"
+              x-model="site.parents"
+              maxlength="110"
+            />
+          </div>
+          <div class="wide">
+            <label class="form-label" for="headline"
+              >Título de bienvenida (usa una coma para dividir en dos
+              líneas)</label
+            ><input
+              id="headline"
+              class="form-field"
+              x-model="site.headline"
+              maxlength="150"
+              required
+            />
+          </div>
+          <div class="wide">
+            <label class="form-label" for="welcome">Mensaje de bienvenida</label
+            ><textarea
+              id="welcome"
+              class="form-field"
+              x-model="site.welcome"
+              maxlength="480"
+              rows="4"
+            ></textarea>
+          </div>
+          <div>
+            <label class="form-label" for="event-date"
+              >Fecha del baby shower</label
+            ><input
+              id="event-date"
+              class="form-field"
+              type="date"
+              x-model="site.event_date"
+            />
+          </div>
+          <div>
+            <label class="form-label" for="event-time">Hora</label
+            ><input
+              id="event-time"
+              class="form-field"
+              type="time"
+              x-model="site.event_time"
+            />
+          </div>
+          <div>
+            <label class="form-label" for="venue">Lugar o dirección</label
+            ><input
+              id="venue"
+              class="form-field"
+              x-model="site.venue"
+              maxlength="160"
+              placeholder="Ej. Salón Los Jardines"
+            />
+          </div>
+          <div>
+            <label class="form-label" for="whatsapp"
+              >WhatsApp de contacto (con código de país)</label
+            ><input
+              id="whatsapp"
+              class="form-field"
+              x-model="site.whatsapp"
+              maxlength="20"
+              placeholder="Ej. 51999999999"
+            />
+          </div>
+          <button
+            type="submit"
+            class="button button-primary wide"
+            :disabled="busy"
+            x-text="busy?'Guardando...':'Guardar cambios ♡'"
+          ></button>
+        </form>
+      </section>
+      <section x-show="tab==='seguridad'" class="admin-pane">
+        <h2>Cambiar contraseña</h2>
+        <p class="admin-muted">
+          Por seguridad, cambia la contraseña inicial antes de compartir la
+          página. Usa al menos 12 caracteres.
+        </p>
+        <form class="admin-form" @submit.prevent="changePassword">
+          <div class="wide">
+            <label class="form-label" for="old-pass">Contraseña actual</label
+            ><input
+              class="form-field"
+              id="old-pass"
+              x-model="security.old_password"
+              type="password"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+          <div>
+            <label class="form-label" for="new-pass">Nueva contraseña</label
+            ><input
+              class="form-field"
+              id="new-pass"
+              x-model="security.new_password"
+              type="password"
+              minlength="12"
+              autocomplete="new-password"
+              required
+            />
+          </div>
+          <div>
+            <label class="form-label" for="confirm-pass"
+              >Repetir nueva contraseña</label
+            ><input
+              class="form-field"
+              id="confirm-pass"
+              x-model="security.confirm"
+              type="password"
+              minlength="12"
+              autocomplete="new-password"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="button button-primary wide"
+            :disabled="busy"
+          >
+            Actualizar contraseña ♡
+          </button>
+        </form>
+        <p class="admin-muted">
+          Los datos se almacenan en Cloud Firestore; los permisos se controlan
+          con <code>firestore.rules</code>. Puedes gestionar usuarios desde
+          Firebase Console → Authentication.
+        </p>
+      </section>
+    </main>
+    <div
+      class="admin-overlay"
+      x-show="showGiftDialog"
+      @click.self="showGiftDialog=false"
+      @keydown.escape.window="showGiftDialog=false"
+      x-cloak
+    >
+      <div
+        class="admin-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="edit-title"
+      >
+        <h2
+          id="edit-title"
+          x-text="editingId?'Editar regalito':'Nuevo regalito'"
+        ></h2>
+        <div x-show="error" class="admin-error" x-text="error"></div>
+        <form class="admin-form" @submit.prevent="saveGift">
+          <div>
+            <label class="form-label" for="gift-name">Nombre</label
+            ><input
+              id="gift-name"
+              class="form-field"
+              x-model="giftForm.name"
+              required
+              maxlength="120"
+            />
+          </div>
+          <div>
+            <label class="form-label" for="gift-emoji">Emoji del regalo</label
+            ><input
+              id="gift-emoji"
+              class="form-field"
+              x-model="giftForm.emoji"
+              required
+              maxlength="24"
+              placeholder="🎁"
+            />
+          </div>
+          <div class="wide">
+            <label class="form-label" for="gift-image">Imagen del regalo (opcional)</label>
+            <div class="image-upload">
+              <img
+                class="image-upload-preview"
+                x-show="giftForm.image"
+                :src="giftForm.image"
+                alt="Vista previa de la imagen del regalo"
+              />
+              <input
+                id="gift-image"
+                type="file"
+                accept="image/*"
+                @change="pickImage($event)"
+              />
+              <button
+                type="button"
+                class="button button-outline"
+                x-show="giftForm.image"
+                @click="giftForm.image=''"
+              >
+                Quitar imagen
+              </button>
+            </div>
+          </div>
+          <div class="wide">
+            <label class="form-label" for="gift-description">Descripción</label
+            ><textarea
+              id="gift-description"
+              class="form-field"
+              x-model="giftForm.description"
+              maxlength="280"
+              rows="2"
+            ></textarea>
+          </div>
+          <div>
+            <label class="form-label" for="gift-category">Categoría</label
+            ><select
+              id="gift-category"
+              class="form-field"
+              x-model="giftForm.category"
+            >
+              <template x-for="cat in categories" :key="cat"
+                ><option :value="cat" x-text="cat"></option
+              ></template>
+            </select>
+          </div>
+          <div>
+            <label class="form-label" for="gift-quantity"
+              >Cantidad deseada</label
+            ><input
+              type="number"
+              id="gift-quantity"
+              class="form-field"
+              x-model.number="giftForm.quantity"
+              min="1"
+              max="100"
+              required
+            />
+          </div>
+          <div class="wide">
+            <label class="form-label" for="gift-link"
+              >Enlace de compra o referencia (opcional)</label
+            ><input
+              type="url"
+              id="gift-link"
+              class="form-field"
+              x-model="giftForm.link"
+              maxlength="500"
+              placeholder="https://..."
+            />
+          </div>
+          <label class="admin-checkbox wide"
+            ><input type="checkbox" x-model="giftForm.featured" /> Mostrar como
+            favorito</label
+          >
+          <div class="admin-dialog-actions wide">
+            <button
+              class="button button-outline"
+              type="button"
+              @click="showGiftDialog=false"
+            >
+              Cancelar</button
+            ><button
+              class="button button-primary"
+              type="submit"
+              :disabled="busy"
+              x-text="busy?'Guardando...':'Guardar regalito'"
+            ></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fbf5f1" />
+    <meta
+      name="description"
+      content="Nuestra lista de regalitos para la llegada de nuestra pequeña. Elige un detalle con amor."
+    />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/12.19.0/firebase-auth-compat.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore-compat.js"
+    ></script>
+    <script defer src="assets/js/firebase-config.js"></script>
+    <script defer src="assets/js/firebase-api.js"></script>
+    <script defer src="assets/js/common.js"></script>
+    <script defer src="assets/js/app.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"
+    ></script>
+    <title>Lista de regalos · Una dulce espera</title>
+  </head>
+
+  <body class="site-body" x-data="giftApp" x-cloak>
+    <div class="announcement">
+      <span class="tiny-star">✳</span> Un rinconcito hecho con todo el amor del
+      mundo <span class="tiny-star">✳</span>
+    </div>
+    <header class="site-header wrap">
+      <a class="brand" href="index.html" aria-label="Volver al inicio">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="663"
+          height="129"
+          viewBox="0 0 221 43"
+          role="img"
+          aria-label="Mi Baby Shower"
+        >
+          <ellipse cx="31.7" cy="22" rx="28" ry="19.5" fill="#FADCE3" />
+          <path
+            d="M 32 9 C 21 8.5 14 17 13.1 25 C 8.8 24 7 28 8.2 31.7 C 9.4 35.4 13 35.5 15.1 35.5 C 18.3 39.3 25.4 41 31.9 41 C 39.1 41 45.7 38.5 48.6 35.3 C 53.7 35.7 56.8 31 54.7 27.8 C 53.9 26.2 52 25.2 50.6 25.5 C 49.9 18.4 44.3 10.7 36.4 9.8 Z"
+            fill="#FEE4D5"
+            stroke="#AC8062"
+            stroke-width="1.7"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M 29.4 10.2 C 27 7.1 29.2 4.6 32.1 6 C 30 4.2 30.1 1.8 33.1 2.1 C 35.8 2.2 36.4 5 35.5 7.8 C 38 6.8 39.7 8.3 40.2 9.9 C 40.5 12.1 37.9 13.3 35.3 11.7 C 33 14.1 31.2 13.8 29.4 10.2 Z"
+            fill="#FEE4D5"
+            stroke="#AB795B"
+            stroke-width="1.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <ellipse cx="24.0" cy="28.1" rx="1.8" ry="2.2" fill="#704B3F" />
+          <ellipse cx="40.0" cy="28.1" rx="1.8" ry="2.2" fill="#704B3F" />
+          <ellipse
+            cx="20.1"
+            cy="33"
+            rx="4.1"
+            ry="2.3"
+            fill="#F6B0B2"
+            opacity=".58"
+          />
+          <ellipse
+            cx="43.8"
+            cy="33"
+            rx="4.1"
+            ry="2.3"
+            fill="#F6B0B2"
+            opacity=".58"
+          />
+          <ellipse cx="32.2" cy="32.2" rx="1.1" ry=".85" fill="#DC9E87" />
+          <path
+            d="M 28.8 35.5 Q 32.0 39.7 35.1 35.5"
+            fill="none"
+            stroke="#94664F"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          />
+          <path
+            d="M 87.00,18.80 Q 86.60,18.80 86.20,19.20 Q 85.80,19.60 85.60,22.30 Q 85.40,25.00 85.90,26.00 Q 86.40,27.00 87.30,27.20 Q 88.20,27.40 89.00,26.60 Q 89.80,25.80 90.30,24.50 Q 90.80,23.20 90.40,23.10 Q 90.00,23.00 89.20,24.20 Q 88.40,25.40 87.90,25.30 Q 87.40,25.20 87.70,22.40 Q 88.00,19.60 87.70,19.20 Q 87.40,18.80 87.00,18.80 Z M 87.80,15.10 Q 87.20,14.80 86.80,15.20 Q 86.40,15.60 86.40,16.10 Q 86.40,16.60 87.10,16.80 Q 87.80,17.00 88.10,16.70 Q 88.40,16.40 88.40,15.90 Q 88.40,15.40 87.80,15.10 Z M 71.90,11.90 Q 71.20,12.00 70.60,13.00 Q 70.00,14.00 69.40,16.30 Q 68.80,18.60 68.40,21.60 Q 68.00,24.60 68.00,25.90 Q 68.00,27.20 68.30,28.00 Q 68.60,28.80 68.90,29.10 Q 69.20,29.40 69.80,29.20 Q 70.40,29.00 70.20,26.30 Q 70.00,23.60 70.70,19.30 Q 71.40,15.00 71.80,14.80 Q 72.20,14.60 72.40,14.90 Q 72.60,15.20 73.30,20.10 Q 74.00,25.00 74.40,25.70 Q 74.80,26.40 75.40,26.50 Q 76.00,26.60 76.30,26.40 Q 76.60,26.20 77.10,25.10 Q 77.60,24.00 78.80,19.60 Q 80.00,15.20 80.50,14.80 Q 81.00,14.40 81.20,14.60 Q 81.40,14.80 81.50,20.80 Q 81.60,26.80 81.80,27.50 Q 82.00,28.20 82.80,28.70 Q 83.60,29.20 83.80,28.50 Q 84.00,27.80 83.60,26.80 Q 83.20,25.80 83.20,20.80 Q 83.20,15.80 83.00,14.40 Q 82.80,13.00 82.30,12.50 Q 81.80,12.00 81.10,12.00 Q 80.40,12.00 80.10,12.30 Q 79.80,12.60 78.90,14.40 Q 78.00,16.20 77.30,18.90 Q 76.60,21.60 76.10,22.10 Q 75.60,22.60 74.70,17.90 Q 73.80,13.20 73.20,12.50 Q 72.60,11.80 71.90,11.90 Z M 102.40,11.00 Q 100.00,11.00 98.40,11.80 Q 96.80,12.60 96.00,13.60 Q 95.20,14.60 95.10,15.30 Q 95.00,16.00 95.80,16.70 Q 96.60,17.40 96.80,17.10 Q 97.00,16.80 96.90,15.90 Q 96.80,15.00 97.20,14.50 Q 97.60,14.00 98.50,13.40 Q 99.40,12.80 100.70,12.50 Q 102.00,12.20 103.50,12.50 Q 105.00,12.80 105.80,13.50 Q 106.60,14.20 106.70,15.30 Q 106.80,16.40 105.90,17.40 Q 105.00,18.40 104.30,18.70 Q 103.60,19.00 102.90,19.00 Q 102.20,19.00 102.00,18.80 Q 101.80,18.60 102.00,16.40 Q 102.20,14.20 101.80,13.90 Q 101.40,13.60 100.80,14.10 Q 100.20,14.60 99.80,16.90 Q 99.40,19.20 99.30,22.20 Q 99.20,25.20 98.80,26.20 Q 98.40,27.20 98.80,28.00 Q 99.20,28.80 100.50,29.00 Q 101.80,29.20 103.30,29.10 Q 104.80,29.00 105.90,28.50 Q 107.00,28.00 107.80,27.20 Q 108.60,26.40 108.90,25.70 Q 109.20,25.00 109.30,24.00 Q 109.40,23.00 109.20,22.20 Q 109.00,21.40 107.80,20.50 Q 106.60,19.60 107.70,18.10 Q 108.80,16.60 108.80,15.60 Q 108.80,14.60 107.80,13.30 Q 106.80,12.00 105.80,11.50 Q 104.80,11.00 102.40,11.00 Z M 104.00,20.60 Q 105.00,20.60 105.60,20.90 Q 106.20,21.20 106.80,22.10 Q 107.40,23.00 107.10,24.20 Q 106.80,25.40 106.40,25.90 Q 106.00,26.40 105.10,26.90 Q 104.20,27.40 102.80,27.40 Q 101.40,27.40 101.00,26.90 Q 100.60,26.40 100.90,25.90 Q 101.20,25.40 101.30,23.40 Q 101.40,21.40 102.20,21.00 Q 103.00,20.60 104.00,20.60 Z M 157.40,11.60 Q 156.80,12.40 156.30,19.60 Q 155.80,26.80 156.00,27.20 Q 156.20,27.60 156.90,27.40 Q 157.60,27.20 157.90,25.70 Q 158.20,24.20 159.30,22.30 Q 160.40,20.40 160.80,20.60 Q 161.20,20.80 161.10,23.20 Q 161.00,25.60 161.60,26.40 Q 162.20,27.20 162.90,27.20 Q 163.60,27.20 164.00,26.70 Q 164.40,26.20 164.90,26.10 Q 165.40,26.00 166.40,26.90 Q 167.40,27.80 168.10,27.70 Q 168.80,27.60 169.80,26.70 Q 170.80,25.80 171.10,24.70 Q 171.40,23.60 171.70,23.30 Q 172.00,23.00 172.50,23.20 Q 173.00,23.40 173.00,24.60 Q 173.00,25.80 173.80,26.70 Q 174.60,27.60 175.10,27.50 Q 175.60,27.40 176.20,26.70 Q 176.80,26.00 177.10,26.00 Q 177.40,26.00 178.10,26.80 Q 178.80,27.60 179.40,27.50 Q 180.00,27.40 180.70,26.70 Q 181.40,26.00 181.90,24.60 Q 182.40,23.20 182.90,23.40 Q 183.40,23.60 183.50,24.60 Q 183.60,25.60 184.30,26.40 Q 185.00,27.20 185.60,27.50 Q 186.20,27.80 187.00,27.70 Q 187.80,27.60 189.20,26.60 Q 190.60,25.60 191.10,24.80 Q 191.60,24.00 191.70,23.20 Q 191.80,22.40 192.40,21.60 Q 193.00,20.80 193.40,21.00 Q 193.80,21.20 193.40,23.70 Q 193.00,26.20 193.70,27.00 Q 194.40,27.80 195.00,27.90 Q 195.60,28.00 196.00,27.80 Q 196.40,27.60 197.60,25.80 Q 198.80,24.00 198.80,23.60 Q 198.80,23.20 198.60,23.00 Q 198.40,22.80 198.10,22.90 Q 197.80,23.00 197.20,24.10 Q 196.60,25.20 195.90,25.60 Q 195.20,26.00 195.00,25.50 Q 194.80,25.00 195.40,22.60 Q 196.00,20.20 195.50,19.70 Q 195.00,19.20 193.90,18.80 Q 192.80,18.40 192.80,17.60 Q 192.80,16.80 192.10,16.70 Q 191.40,16.60 190.80,17.50 Q 190.20,18.40 190.70,19.40 Q 191.20,20.40 191.20,21.00 Q 191.20,21.60 190.60,22.80 Q 190.00,24.00 189.10,24.90 Q 188.20,25.80 187.50,25.90 Q 186.80,26.00 186.20,25.40 Q 185.60,24.80 185.70,24.20 Q 185.80,23.60 186.90,23.20 Q 188.00,22.80 188.80,21.70 Q 189.60,20.60 189.50,20.10 Q 189.40,19.60 188.50,18.80 Q 187.60,18.00 186.60,18.40 Q 185.60,18.80 184.60,20.00 Q 183.60,21.20 183.10,20.90 Q 182.60,20.60 182.50,19.60 Q 182.40,18.60 182.10,18.30 Q 181.80,18.00 181.30,18.00 Q 180.80,18.00 180.60,18.20 Q 180.40,18.40 180.60,20.90 Q 180.80,23.40 180.30,24.30 Q 179.80,25.20 179.50,25.20 Q 179.20,25.20 179.00,24.90 Q 178.80,24.60 178.80,22.50 Q 178.80,20.40 178.60,20.10 Q 178.40,19.80 177.80,19.90 Q 177.20,20.00 176.70,22.20 Q 176.20,24.40 175.70,24.80 Q 175.20,25.20 175.00,25.00 Q 174.80,24.80 174.90,21.90 Q 175.00,19.00 174.70,18.70 Q 174.40,18.40 173.80,18.50 Q 173.20,18.60 173.00,19.60 Q 172.80,20.60 172.30,21.00 Q 171.80,21.40 171.20,20.30 Q 170.60,19.20 169.50,18.70 Q 168.40,18.20 167.60,18.60 Q 166.80,19.00 166.40,19.50 Q 166.00,20.00 165.30,22.10 Q 164.60,24.20 164.20,24.70 Q 163.80,25.20 163.50,25.20 Q 163.20,25.20 163.00,25.00 Q 162.80,24.80 163.00,22.70 Q 163.20,20.60 162.90,19.90 Q 162.60,19.20 161.70,18.80 Q 160.80,18.40 160.10,18.80 Q 159.40,19.20 158.90,19.90 Q 158.40,20.60 158.20,20.50 Q 158.00,20.40 159.10,17.40 Q 160.20,14.40 160.10,13.00 Q 160.00,11.60 159.60,11.20 Q 159.20,10.80 158.60,10.80 Q 158.00,10.80 157.40,11.60 Z M 167.20,22.30 Q 167.60,21.80 168.70,22.70 Q 169.80,23.60 169.70,24.20 Q 169.60,24.80 169.10,25.30 Q 168.60,25.80 168.10,25.80 Q 167.60,25.80 167.20,25.10 Q 166.80,24.40 166.80,23.60 Q 166.80,22.80 167.20,22.30 Z M 168.70,20.80 Q 168.40,20.40 168.80,20.30 Q 169.20,20.20 169.40,20.50 Q 169.60,20.80 169.30,21.00 Q 169.00,21.20 168.70,20.80 Z M 187.20,20.00 Q 187.60,20.00 187.80,20.20 Q 188.00,20.40 187.90,20.80 Q 187.80,21.20 187.00,21.50 Q 186.20,21.80 186.20,21.20 Q 186.20,20.60 186.50,20.30 Q 186.80,20.00 187.20,20.00 Z M 158.40,13.60 Q 158.60,13.40 158.70,14.20 Q 158.80,15.00 158.60,15.10 Q 158.40,15.20 158.30,14.50 Q 158.20,13.80 158.40,13.60 Z M 153.30,11.40 Q 152.40,10.80 151.00,10.70 Q 149.60,10.60 148.80,10.80 Q 148.00,11.00 147.10,11.60 Q 146.20,12.20 145.50,13.10 Q 144.80,14.00 144.70,15.30 Q 144.60,16.60 144.80,17.20 Q 145.00,17.80 145.90,18.80 Q 146.80,19.80 148.60,20.90 Q 150.40,22.00 151.10,22.70 Q 151.80,23.40 152.10,24.10 Q 152.40,24.80 152.20,25.40 Q 152.00,26.00 151.50,26.50 Q 151.00,27.00 150.40,27.30 Q 149.80,27.60 148.70,27.60 Q 147.60,27.60 146.80,26.90 Q 146.00,26.20 146.20,24.90 Q 146.40,23.60 145.70,23.70 Q 145.00,23.80 144.60,24.50 Q 144.20,25.20 144.20,25.70 Q 144.20,26.20 144.50,26.80 Q 144.80,27.40 145.80,28.20 Q 146.80,29.00 148.90,29.00 Q 151.00,29.00 151.90,28.50 Q 152.80,28.00 153.40,27.20 Q 154.00,26.40 154.10,25.40 Q 154.20,24.40 154.00,23.60 Q 153.80,22.80 153.00,21.90 Q 152.20,21.00 150.40,19.90 Q 148.60,18.80 147.80,18.00 Q 147.00,17.20 146.80,16.60 Q 146.60,16.00 146.70,15.20 Q 146.80,14.40 147.40,13.70 Q 148.00,13.00 148.70,12.60 Q 149.40,12.20 150.30,12.10 Q 151.20,12.00 152.20,12.80 Q 153.20,13.60 153.30,14.00 Q 153.40,14.40 152.90,15.40 Q 152.40,16.40 153.00,16.60 Q 153.60,16.80 154.20,16.00 Q 154.80,15.20 154.90,14.40 Q 155.00,13.60 154.60,12.80 Q 154.20,12.00 153.30,11.40 Z M 123.80,10.50 Q 123.20,10.40 122.40,11.10 Q 121.60,11.80 121.30,12.40 Q 121.00,13.00 120.10,18.60 Q 119.20,24.20 118.50,24.80 Q 117.80,25.40 117.40,25.20 Q 117.00,25.00 117.30,22.30 Q 117.60,19.60 117.30,19.30 Q 117.00,19.00 115.60,18.60 Q 114.20,18.20 113.30,18.60 Q 112.40,19.00 111.80,19.70 Q 111.20,20.40 110.70,21.90 Q 110.20,23.40 110.20,24.20 Q 110.20,25.00 110.60,25.80 Q 111.00,26.60 111.60,27.00 Q 112.20,27.40 112.70,27.30 Q 113.20,27.20 113.90,26.50 Q 114.60,25.80 114.90,25.80 Q 115.20,25.80 115.90,26.60 Q 116.60,27.40 117.20,27.40 Q 117.80,27.40 118.40,26.70 Q 119.00,26.00 119.40,25.90 Q 119.80,25.80 120.90,26.80 Q 122.00,27.80 122.70,27.80 Q 123.40,27.80 124.20,27.30 Q 125.00,26.80 126.20,25.10 Q 127.40,23.40 127.70,23.80 Q 128.00,24.20 128.10,25.00 Q 128.20,25.80 128.80,26.40 Q 129.40,27.00 130.00,27.00 Q 130.60,27.00 131.20,26.40 Q 131.80,25.80 132.30,25.70 Q 132.80,25.60 132.90,26.00 Q 133.00,26.40 131.00,28.20 Q 129.00,30.00 128.40,31.10 Q 127.80,32.20 127.90,33.00 Q 128.00,33.80 128.60,34.40 Q 129.20,35.00 129.90,35.10 Q 130.60,35.20 131.30,34.90 Q 132.00,34.60 132.90,33.50 Q 133.80,32.40 134.30,31.10 Q 134.80,29.80 134.90,28.50 Q 135.00,27.20 136.40,25.70 Q 137.80,24.20 138.20,23.30 Q 138.60,22.40 138.10,22.30 Q 137.60,22.20 137.30,22.80 Q 137.00,23.40 136.20,24.00 Q 135.40,24.60 135.20,24.10 Q 135.00,23.60 135.30,21.60 Q 135.60,19.60 135.10,19.10 Q 134.60,18.60 134.20,18.70 Q 133.80,18.80 133.10,21.20 Q 132.40,23.60 131.40,24.50 Q 130.40,25.40 130.20,25.20 Q 130.00,25.00 130.40,22.10 Q 130.80,19.20 130.60,18.90 Q 130.40,18.60 129.80,18.60 Q 129.20,18.60 128.90,18.90 Q 128.60,19.20 128.40,20.40 Q 128.20,21.60 127.80,21.90 Q 127.40,22.20 126.90,21.20 Q 126.40,20.20 125.20,19.30 Q 124.00,18.40 124.80,16.40 Q 125.60,14.40 125.70,13.40 Q 125.80,12.40 125.10,11.50 Q 124.40,10.60 123.80,10.50 Z M 132.00,29.10 Q 132.40,29.00 132.60,29.30 Q 132.80,29.60 132.30,30.90 Q 131.80,32.20 131.20,32.90 Q 130.60,33.60 130.30,33.60 Q 130.00,33.60 129.80,33.40 Q 129.60,33.20 129.80,32.10 Q 130.00,31.00 130.80,30.10 Q 131.60,29.20 132.00,29.10 Z M 123.60,20.50 Q 124.00,20.40 124.40,20.80 Q 124.80,21.20 124.80,22.30 Q 124.80,23.40 124.40,24.40 Q 124.00,25.40 123.30,25.80 Q 122.60,26.20 122.20,25.80 Q 121.80,25.40 121.80,23.80 Q 121.80,22.20 122.50,21.40 Q 123.20,20.60 123.60,20.50 Z M 114.50,20.00 Q 115.00,20.00 115.20,20.60 Q 115.40,21.20 114.70,22.90 Q 114.00,24.60 113.30,24.90 Q 112.60,25.20 112.40,24.50 Q 112.20,23.80 112.50,22.70 Q 112.80,21.60 113.40,20.80 Q 114.00,20.00 114.50,20.00 Z M 123.30,13.00 Q 123.80,12.40 124.00,13.20 Q 124.20,14.00 123.40,15.70 Q 122.60,17.40 122.40,16.90 Q 122.20,16.40 122.50,15.90 Q 122.80,15.40 122.80,14.50 Q 122.80,13.60 123.30,13.00 Z"
+            fill="#9D3153"
+            fill-rule="evenodd"
+          />
+          <path
+            d="M 212.1 22.4 C 209.7 18.0 205.9 18.6 204.9 21.4 C 203.7 25.4 208.2 29.2 212.1 32.3 C 216.2 28.9 219.9 25.3 219.0 21.9 C 217.9 18.3 214.0 18.5 212.1 22.4 Z"
+            fill="#E9789E"
+          />
+        </svg>
+      </a>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="regalos.html">Regalitos</a
+        ><a href="index.html#como-funciona">¿Cómo funciona?</a
+        ><a href="index.html#detalles">Detalles</a>
+      </nav>
+      <div class="nav-mobile" x-data="{ open: false }">
+        <button :class="`nav-toggle ${open ? 'active' : ''}`" @click="open = !open" aria-label="Abrir menú de navegación">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+        </button>
+        <div 
+            class="nav-mobile-menu" 
+            x-show="open"
+            style="display: none;"
+            @click.outside="open = false"
+        >
+            <nav class="nav-links" aria-label="Navegación principal">
+                <a href="regalos.html" @click="open = false">Regalitos</a>
+                <a href="index.html#como-funciona" @click="open = false">¿Cómo funciona?</a>
+                <a href="index.html#detalles" @click="open = false">Detalles</a>
+            </nav>
+        </div>
+      </div>
+      <!--
+      <a class="nav-pill" href="regalos.html"
+        >Ver la lista <span aria-hidden="true">↗</span></a
+      > 
+      -->
+    </header>
+    <main class="gifts-page">
+      <section class="catalog-section" id="regalitos">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>Mi lista de <em>regalos</em></h2>
+              <p>
+                Estos son algunos detallitos que nos ayudarán a recibir a
+                nuestra pequeña.
+              </p>
+            </div>
+            <div class="progress-card" x-show="!loading && gifts.length">
+              <div class="progress-top">
+                <span>Regalitos elegidos</span
+                ><strong
+                  ><span x-text="reservedTotal"></span> /
+                  <span x-text="quantityTotal"></span
+                ></strong>
+              </div>
+              <div class="progress-track">
+                <div
+                  class="progress-bar"
+                  :style="`width:${progressPercent}%`"
+                ></div>
+              </div>
+              <span class="progress-foot"
+                ><span>✦</span> Cada detalle cuenta, ¡gracias por tanto
+                amor!</span
+              >
+            </div>
+          </div>
+          <div class="toolbar">
+            <div class="category-tabs" aria-label="Filtrar por categoría">
+              <template x-for="cat in categories" :key="cat"
+                ><button
+                  type="button"
+                  class="category-tab"
+                  :class="{active:category===cat}"
+                  @click="category=cat"
+                  x-text="cat"
+                ></button
+              ></template>
+            </div>
+            <label class="search-box"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="10.8" cy="10.8" r="6.5"></circle>
+                <path d="m16 16 5 5"></path></svg
+              ><input
+                type="search"
+                placeholder="Buscar regalito..."
+                x-model.debounce.200ms="query"
+                aria-label="Buscar regalo"
+            /></label>
+          </div>
+          <div class="filter-row">
+            <label class="toggle-label"
+              ><input type="checkbox" x-model="onlyAvailable" /><span
+                class="toggle-switch"
+              ></span
+              ><span>Mostrar solo disponibles</span></label
+            ><span
+              class="results-count"
+              x-show="!loading"
+              x-text="`${filteredGifts.length} regalitos`"
+            ></span>
+          </div>
+          <div class="loading" x-show="loading">
+            <span class="spinner"></span><span>Cargando los regalitos...</span>
+          </div>
+          <div class="empty-state" x-show="errorMessage && !loading">
+            <div>☁️</div>
+            <h3>Algo salió mal</h3>
+            <p x-text="errorMessage"></p>
+            <button class="button button-primary" @click="reload()">
+              Intentar de nuevo
+            </button>
+          </div>
+          <div class="gifts-grid" x-show="!loading && !errorMessage">
+            <template x-for="gift in filteredGifts" :key="gift.id">
+              <article
+                class="gift-card"
+                :class="{'gift-taken':gift.available===0}"
+              >
+                <div
+                  class="gift-art"
+                  :class="`category-${slug(gift.category)}`"
+                >
+                  <span class="gift-art-sparkle sparkle-small-left">✦</span
+                  ><img
+                    class="gift-image"
+                    x-show="gift.image"
+                    :src="gift.image"
+                    :alt="gift.name"
+                  /><span class="gift-emoji" x-show="!gift.image" x-text="gift.emoji"></span
+                  ><span class="gift-art-sparkle sparkle-small-right">✳</span
+                  ><span class="gift-art-floor"></span
+                  ><span
+                    class="badge-featured"
+                    x-show="gift.featured && gift.available > 0"
+                    >♥ Favorito</span
+                  ><span class="badge-complete" x-show="gift.available===0"
+                    >Ya reservado ♡</span
+                  >
+                </div>
+                <div class="gift-content">
+                  <div class="gift-meta">
+                    <span x-text="gift.category"></span
+                    ><span
+                      class="gift-availability"
+                      :class="{'none-left':gift.available===0}"
+                      x-text="gift.available===0?'Sin unidades disponibles':gift.quantity===1?'Disponible':`${gift.available} de ${gift.quantity} disponibles`"
+                    ></span>
+                  </div>
+                  <h3 x-text="gift.name"></h3>
+                  <p x-text="gift.description"></p>
+                  <div class="gift-footer">
+                    <button
+                      class="gift-button"
+                      :disabled="gift.available===0"
+                      @click="openReserve(gift)"
+                    >
+                      <span
+                        x-text="gift.available===0?'Regalito reservado':'Quiero regalarlo'"
+                      ></span
+                      ><span x-text="gift.available===0?'♡':'↗'"></span></button
+                    ><a
+                      x-show="gift.link"
+                      :href="safeUrl(gift.link)"
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      class="gift-link"
+                      title="Ver enlace de compra"
+                      >Ver referencia ↗</a
+                    >
+                  </div>
+                </div>
+              </article>
+            </template>
+          </div>
+          <div
+            class="empty-state"
+            x-show="!loading && !errorMessage && filteredGifts.length===0"
+          >
+            <div class="empty-state-image">
+              <img src="./assets/img/no_items_found.png" alt="Ilustración de regalo vacío" />
+            </div>
+            <h3>No encontramos regalitos</h3>
+            <p>Prueba buscando otra cosa o cambia los filtros.</p>
+            <button
+              class="button button-outline"
+              @click="query='';category='Todos';onlyAvailable=false"
+            >
+              Ver todos
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div>
+          <div class="footer-logotype">
+            <img class="footer-logotype-baby" src="./assets/img/footer_logotype_baby.png" alt="Ilustración de bebé">
+            <div>
+              <img class="footer-logotype-text" src="./assets/img/page_logotype.png" alt="Mi Baby Shower">
+              <p x-text="site.parents || 'Con amor, nuestra familia'"></p>
+            </div>
+          </div>
+          <img src="./assets/img/footer_heart.png" class="footer-heart" alt="Ilustración de corazón"/>
+        </div>
+          <nav class="nav-links" aria-label="Navegación principal">
+            <a href="regalos.html">Regalitos</a><a href="index.html#como-funciona">¿Cómo funciona?</a><a href="index.html#detalles">Detalles</a>
+          </nav>
+      </div>
+    </footer>
+    <template x-if="selectedGift">
+      <div
+        class="modal-backdrop"
+        @click.self="closeReserve"
+        @keydown.escape.window="closeReserve"
+      >
+        <div
+          class="modal-card"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
+        >
+          <button
+            class="modal-close"
+            type="button"
+            @click="closeReserve"
+            aria-label="Cerrar ventana"
+          >
+            ×
+          </button>
+          <div class="modal-symbol" x-text="selectedGift.emoji"></div>
+          <div class="eyebrow modal-eyebrow">
+            <span class="flower-symbol">✿</span> UN REGALO CON AMOR
+          </div>
+          <h2 id="modal-title" x-text="`Reservar ${selectedGift.name}`"></h2>
+          <p>
+            Qué lindo que quieras regalarnos este detallito. Déjanos tu nombre
+            para apartarlo.
+          </p>
+          <form @submit.prevent="submitReserve">
+            <label class="form-label" for="guest-name"
+              >Tu nombre <span>*</span></label
+            ><input
+              class="form-field"
+              id="guest-name"
+              x-model.trim="reservation.name"
+              placeholder="Ej. María González"
+              maxlength="100"
+              required
+              autocomplete="name"
+            /><template x-if="selectedGift.quantity > 1">
+              <div>
+                <label class="form-label" for="guest-quantity"
+                  >¿Cuántas unidades deseas reservar?</label
+                ><input
+                  id="guest-quantity"
+                  class="form-field"
+                  type="number"
+                  min="1"
+                  :max="selectedGift.available"
+                  x-model.number="reservation.quantity"
+                  required
+                />
+              </div> </template
+            ><label class="form-label" for="guest-message"
+              >Un mensajito para la bebé
+              <span class="optional">(opcional)</span></label
+            ><textarea
+              class="form-field form-textarea"
+              id="guest-message"
+              x-model.trim="reservation.message"
+              placeholder="¡Te esperamos con mucho amor!"
+              maxlength="400"
+              rows="3"
+            ></textarea>
+            <div
+              class="modal-error"
+              x-show="reservation.error"
+              x-text="reservation.error"
+              role="alert"
+            ></div>
+            <button
+              class="button button-primary full-width"
+              type="submit"
+              :disabled="reservation.submitting"
+            >
+              <span
+                x-text="reservation.submitting?'Guardando...':'Confirmar mi regalito'"
+              ></span
+              ><span>♡</span>
+            </button>
+            <p class="privacy-note">
+              Tu nombre y mensaje solo serán visibles para quienes organizan el
+              baby shower.
+            </p>
+          </form>
+        </div>
+      </div>
+    </template>
+    <template x-if="successGift">
+      <div
+        class="modal-backdrop"
+        @click.self="closeSuccess"
+        @keydown.escape.window="closeSuccess"
+      >
+        <div
+          class="modal-card success-card"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="success-title"
+        >
+          <div class="success-icon">♡</div>
+          <div class="eyebrow modal-eyebrow">
+            <span class="flower-symbol">✿</span> ¡QUÉ EMOCIÓN!
+          </div>
+          <h2 id="success-title">¡Muchísimas gracias!</h2>
+          <p>
+            Reservaste <strong x-text="successGift"></strong>. Tu gesto será
+            parte de nuestros recuerdos más bonitos.
+          </p>
+          <button
+            class="button button-primary full-width"
+            @click="closeSuccess"
+          >
+            Seguir viendo regalitos ♡
+          </button>
+        </div>
+      </div>
+    </template>
+  </body>
+</html>

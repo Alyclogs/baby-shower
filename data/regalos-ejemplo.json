@@ -1,0 +1,135 @@
+{
+  "site": {
+    "baby_name": "Nuestra bebita",
+    "parents": "Con muchísimo amor, nuestra familia",
+    "headline": "Una dulce espera, un amor infinito",
+    "welcome": "Nuestra pequeña está en camino y cada detalle elegido con cariño será parte de su historia. Si deseas regalarnos algo, aquí encontrarás algunas ideas para acompañar sus primeros días. ♡",
+    "event_date": "",
+    "event_time": "",
+    "venue": "",
+    "whatsapp": ""
+  },
+  "gifts": [
+    {
+      "id": "regalo-01",
+      "name": "Pañales talla recién nacido",
+      "description": "Un básico que nunca sobra para sus primeros días.",
+      "category": "Baño",
+      "emoji": "🧷",
+      "quantity": 5,
+      "link": "",
+      "featured": true
+    },
+    {
+      "id": "regalo-02",
+      "name": "Conjunto de algodón",
+      "description": "Suavecitos, cómodos y perfectos para estar en casita.",
+      "category": "Ropita",
+      "emoji": "👶",
+      "quantity": 2,
+      "link": "",
+      "featured": true
+    },
+    {
+      "id": "regalo-03",
+      "name": "Manta de muselina",
+      "description": "Ligera y delicada para arropar a nuestra niña.",
+      "category": "Dormitorio",
+      "emoji": "🧶",
+      "quantity": 2,
+      "link": "",
+      "featured": true
+    },
+    {
+      "id": "regalo-04",
+      "name": "Toallitas húmedas",
+      "description": "Sin perfume, ideales para piel sensible.",
+      "category": "Baño",
+      "emoji": "🫧",
+      "quantity": 4,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "regalo-05",
+      "name": "Biberón anticólicos",
+      "description": "Para acompañar sus tomas cuando sea necesario.",
+      "category": "Alimentación",
+      "emoji": "🍼",
+      "quantity": 2,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "regalo-06",
+      "name": "Baberos de algodón",
+      "description": "Prácticos, suaves y muy bonitos.",
+      "category": "Alimentación",
+      "emoji": "🎀",
+      "quantity": 3,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "regalo-07",
+      "name": "Set de bodys",
+      "description": "De manga corta o larga, tallas de 0 a 6 meses.",
+      "category": "Ropita",
+      "emoji": "🩷",
+      "quantity": 3,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "regalo-08",
+      "name": "Toalla con capucha",
+      "description": "Para salir del bañito bien abrigadita.",
+      "category": "Baño",
+      "emoji": "🛁",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "regalo-09",
+      "name": "Sábanas para cuna",
+      "description": "Telas suaves, frescas y transpirables.",
+      "category": "Dormitorio",
+      "emoji": "☁️",
+      "quantity": 2,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "regalo-10",
+      "name": "Sonajero sensorial",
+      "description": "Un pequeño mundo de sonidos y descubrimientos.",
+      "category": "Juguetes",
+      "emoji": "🧸",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "regalo-11",
+      "name": "Mordedor de silicona",
+      "description": "De una sola pieza, apto para bebés.",
+      "category": "Juguetes",
+      "emoji": "🌼",
+      "quantity": 2,
+      "link": "",
+      "featured": false
+    },
+    {
+      "id": "regalo-12",
+      "name": "Bolso organizador",
+      "description": "Para llevar pañales y esenciales en nuestros paseos.",
+      "category": "Paseo",
+      "emoji": "🎒",
+      "quantity": 1,
+      "link": "",
+      "featured": false
+    }
+  ],
+  "reservations": []
+}
