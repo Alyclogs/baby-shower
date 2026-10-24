@@ -163,7 +163,11 @@
             >
               🎀 Importar regalos sugeridos
             </button>
-            <button type="button" class="button button-primary" @click="newGift">
+            <button
+              type="button"
+              class="button button-primary"
+              @click="newGift"
+            >
               + Agregar regalo
             </button>
           </div>
@@ -187,8 +191,10 @@
                         class="table-thumb"
                         x-show="gift.image"
                         :src="gift.image"
-                        alt=""
-                      /><span x-show="!gift.image" x-text="gift.emoji"></span>
+                        alt="" /><span
+                        x-show="!gift.image"
+                        x-text="gift.emoji"
+                      ></span>
                       <span x-text="gift.name"></span
                     ></strong>
                     <div class="table-sub" x-text="gift.description"></div>
@@ -268,7 +274,18 @@
                       x-text="r.message"
                     ></div>
                   </td>
-                  <td x-text="giftName(r.gift_id)"></td>
+                  <td>
+                    <img
+                      class="table-thumb"
+                      x-show="giftImage(r.gift_id)"
+                      :src="giftImage(r.gift_id)"
+                      alt=""
+                    /><span
+                      x-show="!giftImage(r.gift_id)"
+                      x-text="gift.emoji"
+                    ></span>
+                    <span x-text="giftName(r.gift_id)"></span>
+                  </td>
                   <td x-text="r.quantity"></td>
                   <td x-text="formatDate(r.created_at)"></td>
                   <td>
@@ -484,7 +501,9 @@
             />
           </div>
           <div class="wide">
-            <label class="form-label" for="gift-image">Imagen del regalo (opcional)</label>
+            <label class="form-label" for="gift-image"
+              >Imagen del regalo (opcional)</label
+            >
             <div class="image-upload">
               <img
                 class="image-upload-preview"

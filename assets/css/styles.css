@@ -1185,14 +1185,12 @@ button:disabled {
 .details-art {
   height: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  align-items: end;
+  position: absolute;
+  right: -60%;
+  bottom: -10%;
 }
 .details-art-img {
-  width: 344px;
-  height: 344px;
+  width: 420px;
 }
 .details-art-img img {
   width: 100%;
@@ -1281,7 +1279,7 @@ button:disabled {
 .footer-heart {
   position: absolute;
   width: 162px;
-  top: -23px;
+  top: -22px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -1998,8 +1996,11 @@ button:disabled {
   .details-art {
     width: 100%;
     height: 100%;
-    transform: none;
-    margin: 10px auto 0;
+    position: absolute;
+    z-index: 0;
+    bottom: -55%;
+    opacity: 0.75;
+    right: -55%;
   }
   .details-art-img {
     width: 160px;

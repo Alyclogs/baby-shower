@@ -28,7 +28,7 @@ document.addEventListener('alpine:init', () => {
       } catch (e) {
         this.error = babyFirebase.readableError(e);
         this.authenticated = false;
-        try { await babyFirebase.init().auth.signOut(); } catch (_) {}
+        try { await babyFirebase.init().auth.signOut(); } catch (_) { }
       } finally { this.busy = false; }
     },
     async logout() {
@@ -44,7 +44,7 @@ document.addEventListener('alpine:init', () => {
         db.collection('gifts').get(), db.collection('reservations').get(), db.doc('config/site').get()
       ]);
       this.gifts = giftsSnap.docs.map(doc => babyFirebase.normalizeGift(doc.id, doc.data()))
-        .sort((a,b) => a.name.localeCompare(b.name, 'es'));
+        .sort((a, b) => a.name.localeCompare(b.name, 'es'));
       this.reservations = reservationsSnap.docs.map(doc => ({
         id: doc.id, ...doc.data(),
         created_at: doc.data().created_at?.toDate?.()?.toISOString?.() || new Date(0).toISOString()
@@ -61,18 +61,19 @@ document.addEventListener('alpine:init', () => {
       } catch (e) { this.error = babyFirebase.readableError(e); return false; }
       finally { this.busy = false; }
     },
+    giftImage(id) { return this.gifts.find(g => g.id === id)?.image || ''; },
     giftName(id) { return this.gifts.find(g => g.id === id)?.name || 'Regalo no encontrado'; },
     formatDate(iso) {
-      return new Intl.DateTimeFormat('es-PE', {day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(iso));
+      return new Intl.DateTimeFormat('es-PE', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date(iso));
     },
     newGift() {
       this.error = ''; this.notice = ''; this.editingId = '';
-      this.giftForm = {name:'',description:'',category:'Ropita',emoji:'🎁',image:'',quantity:1,link:'',featured:false};
+      this.giftForm = { name: '', description: '', category: 'Ropita', emoji: '🎁', image: '', quantity: 1, link: '', featured: false };
       this.showGiftDialog = true;
     },
     editGift(gift) {
       this.error = ''; this.notice = ''; this.editingId = gift.id;
-      this.giftForm = {name:gift.name,description:gift.description,category:gift.category,emoji:gift.emoji,image:gift.image||'',quantity:gift.quantity,link:gift.link,featured:gift.featured};
+      this.giftForm = { name: gift.name, description: gift.description, category: gift.category, emoji: gift.emoji, image: gift.image || '', quantity: gift.quantity, link: gift.link, featured: gift.featured };
       this.showGiftDialog = true;
     },
     // Reduce la imagen en el navegador y la guarda como data URL en el propio regalo (sin Firebase Storage).
@@ -109,7 +110,7 @@ document.addEventListener('alpine:init', () => {
       });
     },
     async saveGift() {
-      const data = {...this.giftForm};
+      const data = { ...this.giftForm };
       data.name = data.name.trim(); data.description = data.description.trim();
       data.quantity = Number(data.quantity);
       if (!data.name || !Number.isInteger(data.quantity) || data.quantity < 1 || data.quantity > 100) {
@@ -129,7 +130,7 @@ document.addEventListener('alpine:init', () => {
             if (Number(snap.data().reserved || 0) > data.quantity) throw new Error('No puedes reducir la cantidad por debajo de lo ya reservado.');
             tx.update(ref, data);
           });
-        } else await db.collection('gifts').add({...data, reserved:0});
+        } else await db.collection('gifts').add({ ...data, reserved: 0 });
       }, '¡Regalito guardado correctamente!');
       if (ok) this.showGiftDialog = false;
     },
@@ -155,7 +156,7 @@ document.addEventListener('alpine:init', () => {
         if (!gs.exists || !rs.exists) throw new Error('La reserva o el regalo ya no existe.');
         const reserved = Number(gs.data().reserved) - Number(rs.data().quantity);
         if (reserved < 0) throw new Error('Los datos de cantidades no son consistentes.');
-        tx.update(giftRef, {reserved});
+        tx.update(giftRef, { reserved });
         tx.delete(resRef);
       }), 'Reserva liberada.');
     },
@@ -173,7 +174,7 @@ document.addEventListener('alpine:init', () => {
         await user.reauthenticateWithCredential(credentials);
         await user.updatePassword(this.security.new_password);
       }, 'Contraseña cambiada correctamente.');
-      if (ok) this.security = {old_password:'',new_password:'',confirm:''};
+      if (ok) this.security = { old_password: '', new_password: '', confirm: '' };
     },
     async resetPassword() {
       if (!this.email) { this.error = 'Escribe primero tu correo electrónico.'; return; }
@@ -188,14 +189,14 @@ document.addEventListener('alpine:init', () => {
     async importSuggested() {
       const { db } = babyFirebase.init();
       await this.submit(async () => {
-        const response = await fetch('data/regalos-extra.json', {cache:'no-store'});
+        const response = await fetch('data/regalos-extra.json', { cache: 'no-store' });
         if (!response.ok) throw new Error('No se encontró el archivo de regalos sugeridos.');
         const { gifts } = await response.json();
         const existing = new Set(this.gifts.map(g => g.id));
         const missing = gifts.filter(g => !existing.has(g.id));
         if (!missing.length) throw new Error('Los regalos sugeridos ya están importados.');
         const batch = db.batch();
-        missing.forEach(({id, ...gift}) => batch.set(db.collection('gifts').doc(id), {...gift, reserved:0}));
+        missing.forEach(({ id, ...gift }) => batch.set(db.collection('gifts').doc(id), { ...gift, reserved: 0 }));
         await batch.commit();
       }, '¡Regalos sugeridos importados! Edita cada uno para añadir su enlace e imagen.');
     },
@@ -203,13 +204,13 @@ document.addEventListener('alpine:init', () => {
       if (this.gifts.length > 0) { this.error = 'La importación solo está disponible si no tienes regalos.'; return; }
       const { db } = babyFirebase.init();
       await this.submit(async () => {
-        const response = await fetch('data/regalos-ejemplo.json', {cache:'no-store'});
+        const response = await fetch('data/regalos-ejemplo.json', { cache: 'no-store' });
         if (!response.ok) throw new Error('No se encontró el archivo de regalos de ejemplo.');
         const sample = await response.json();
         const batch = db.batch();
         sample.gifts.forEach(g => {
-          const {id, ...gift} = g;
-          batch.set(db.collection('gifts').doc(id), {...gift, reserved:0});
+          const { id, ...gift } = g;
+          batch.set(db.collection('gifts').doc(id), { ...gift, reserved: 0 });
         });
         batch.set(db.doc('config/site'), sample.site);
         await batch.commit();
