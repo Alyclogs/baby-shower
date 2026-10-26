@@ -1385,6 +1385,11 @@ button:disabled {
   border-color: #c28690;
   box-shadow: 0 0 0 3px #eecfd03b;
 }
+.form-field:disabled {
+  background: #fdf7f6;
+  color: #b9a9ad;
+  cursor: not-allowed;
+}
 .form-textarea {
   resize: vertical;
   min-height: 84px;

@@ -204,7 +204,7 @@
                     <span
                       class="status-pill"
                       :class="{'is-full':!gift.available}"
-                      x-text="`${gift.reserved} / ${gift.quantity}`"
+                      x-text="gift.unlimited ? `${gift.reserved} / ∞` : `${gift.reserved} / ${gift.quantity}`"
                     ></span>
                   </td>
                   <td>
@@ -550,19 +550,31 @@
             </select>
           </div>
           <div>
-            <label class="form-label" for="gift-quantity"
-              >Cantidad deseada</label
-            ><input
-              type="number"
-              id="gift-quantity"
-              class="form-field"
-              x-model.number="giftForm.quantity"
-              min="1"
-              max="100"
-              required
-            />
+            <div>
+              <label class="form-label" for="gift-quantity"
+                >Cantidad deseada</label
+              ><input
+                type="number"
+                id="gift-quantity"
+                class="form-field"
+                x-model.number="giftForm.quantity"
+                min="1"
+                max="100"
+                :disabled="giftForm.unlimited"
+              />
+            </div>
+            <div>
+              <label class="toggle-label"
+                ><input
+                  type="checkbox"
+                  id="gift-unlimited"
+                  x-model="giftForm.unlimited"
+                /><span class="toggle-switch"></span
+                ><span>Ilimitado</span></label
+              >
+            </div>
           </div>
-          <div class="wide">
+          <div class="wide" style="margin-top: 0.5em">
             <label class="form-label" for="gift-link"
               >Enlace de compra o referencia (opcional)</label
             ><input

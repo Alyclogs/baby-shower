@@ -222,7 +222,7 @@
                     ><span
                       class="gift-availability"
                       :class="{'none-left':gift.available===0}"
-                      x-text="gift.available===0?'Sin unidades disponibles':gift.quantity===1?'Disponible':`${gift.available} de ${gift.quantity} disponibles`"
+                      x-text="gift.unlimited?'Siempre disponible':gift.available===0?'Sin unidades disponibles':gift.quantity===1?'Disponible':`${gift.available} de ${gift.quantity} disponibles`"
                     ></span>
                   </div>
                   <h3 x-text="gift.name"></h3>
@@ -326,7 +326,7 @@
               placeholder="Ej. María González"
               maxlength="100"
               autocomplete="name"
-            /><template x-if="selectedGift.quantity > 1">
+            /><template x-if="selectedGift.unlimited || selectedGift.quantity > 1">
               <div>
                 <label class="form-label" for="guest-quantity"
                   >¿Cuántas unidades deseas reservar?</label
@@ -335,7 +335,7 @@
                   class="form-field"
                   type="number"
                   min="1"
-                  :max="selectedGift.available"
+                  :max="selectedGift.unlimited ? 100 : selectedGift.available"
                   x-model.number="reservation.quantity"
                   required
                 />

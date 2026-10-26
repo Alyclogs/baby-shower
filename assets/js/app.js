@@ -70,7 +70,7 @@ document.addEventListener('alpine:init', () => {
           const snap = await tx.get(giftRef);
           if (!snap.exists) throw new Error('Este regalito ya no está disponible.');
           const gift = snap.data();
-          if (Number(gift.quantity) - Number(gift.reserved) < quantity) throw new Error('No quedan suficientes unidades. Actualiza la página y elige otra cantidad.');
+          if (gift.unlimited !== true && Number(gift.quantity) - Number(gift.reserved) < quantity) throw new Error('No quedan suficientes unidades. Actualiza la página y elige otra cantidad.');
           tx.update(giftRef, { reserved: Number(gift.reserved) + quantity });
           tx.set(resRef, {
             gift_id: giftId, uid: guest.uid, name, message, quantity,

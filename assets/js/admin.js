@@ -68,12 +68,12 @@ document.addEventListener('alpine:init', () => {
     },
     newGift() {
       this.error = ''; this.notice = ''; this.editingId = '';
-      this.giftForm = { name: '', description: '', category: 'Ropita', emoji: '🎁', image: '', quantity: 1, link: '', featured: false };
+      this.giftForm = { name: '', description: '', category: 'Ropita', emoji: '🎁', image: '', quantity: 1, unlimited: false, link: '', featured: false };
       this.showGiftDialog = true;
     },
     editGift(gift) {
       this.error = ''; this.notice = ''; this.editingId = gift.id;
-      this.giftForm = { name: gift.name, description: gift.description, category: gift.category, emoji: gift.emoji, image: gift.image || '', quantity: gift.quantity, link: gift.link, featured: gift.featured };
+      this.giftForm = { name: gift.name, description: gift.description, category: gift.category, emoji: gift.emoji, image: gift.image || '', quantity: gift.quantity, unlimited: gift.unlimited, link: gift.link, featured: gift.featured };
       this.showGiftDialog = true;
     },
     // Reduce la imagen en el navegador y la guarda como data URL en el propio regalo (sin Firebase Storage).
@@ -112,11 +112,13 @@ document.addEventListener('alpine:init', () => {
     async saveGift() {
       const data = { ...this.giftForm };
       data.name = data.name.trim(); data.description = data.description.trim();
-      data.quantity = Number(data.quantity);
+      data.unlimited = data.unlimited === true;
+      // Con cantidad ilimitada se conserva un número válido porque las reglas exigen que quantity sea int.
+      data.quantity = data.unlimited ? 1 : Number(data.quantity);
       if (!data.name || !Number.isInteger(data.quantity) || data.quantity < 1 || data.quantity > 100) {
         this.error = 'Completa el nombre y usa una cantidad entre 1 y 100.'; return;
       }
-      if (this.editingId && data.quantity < (this.gifts.find(g => g.id === this.editingId)?.reserved || 0)) {
+      if (!data.unlimited && this.editingId && data.quantity < (this.gifts.find(g => g.id === this.editingId)?.reserved || 0)) {
         this.error = 'La cantidad no puede ser menor a las unidades ya reservadas.'; return;
       }
       const { db } = babyFirebase.init();
@@ -127,7 +129,7 @@ document.addEventListener('alpine:init', () => {
           await db.runTransaction(async tx => {
             const snap = await tx.get(ref);
             if (!snap.exists) throw new Error('El regalo ya no existe.');
-            if (Number(snap.data().reserved || 0) > data.quantity) throw new Error('No puedes reducir la cantidad por debajo de lo ya reservado.');
+            if (!data.unlimited && Number(snap.data().reserved || 0) > data.quantity) throw new Error('No puedes reducir la cantidad por debajo de lo ya reservado.');
             tx.update(ref, data);
           });
         } else await db.collection('gifts').add({ ...data, reserved: 0 });

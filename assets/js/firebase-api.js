@@ -52,7 +52,8 @@
   }
   function normalizeGift(id, data) {
     const quantity = Number(data.quantity || 0), reserved = Number(data.reserved || 0);
-    return { ...data, id, quantity, reserved, available: Math.max(0, quantity - reserved) };
+    const unlimited = data.unlimited === true;
+    return { ...data, id, quantity, reserved, unlimited, available: unlimited ? Infinity : Math.max(0, quantity - reserved) };
   }
   window.babyFirebase = { init, authReady, ensureGuest, readableError, normalizeGift };
 })();
